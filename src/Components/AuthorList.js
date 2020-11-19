@@ -3,26 +3,26 @@ import axios from 'axios';
 import { DataGrid } from '@material-ui/data-grid';
 
 
-class BookList extends React.Component{
+class AuthorList extends React.Component{
     constructor(props) {
         super(props);
         this.state= {
             columns : [
                 { field: 'id', headerName: 'ID', width: 70 },
-                { field: 'title', headerName: 'Title', width: 130 },
-                { field: 'isbn', headerName: 'ISBN', width: 130 },
-                { field: 'pages', headerName: 'Pages', width: 90 }],
+                { field: 'name', headerName: 'Name', width: 130 },
+                { field: 'lastName', headerName: 'Last Name', width: 130 },
+                { field: 'books.id', headerName: 'Books ID', width: 130 }],
 
-            books:[]
+            author:[]
         }
     }
 
     componentDidMount() {
         axios
-            .get('http://localhost:8080/api/books')
+            .get('http://localhost:8080/api/authors')
             .then(res => {
                 console.log(res);
-                this.setState({books: res.data});
+                this.setState({author: res.data});
             }).catch(error=> console.log(error))
     }
 
@@ -30,9 +30,9 @@ class BookList extends React.Component{
         return(
 
             <div style={{ height: 400, width: '100%' }}>
-                <DataGrid rows={this.state.books} columns={this.state.columns} checkboxSelection/>
+                <DataGrid rows={this.state.author} columns={this.state.columns} checkboxSelection/>
             </div>
         )
     }
 }
-export default BookList
+export default AuthorList
