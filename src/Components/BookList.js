@@ -1,10 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 
+
 export default class BookList extends React.Component{
-    state = {
+    state ={
         books:[]
-    };
+    }
 
     componentDidMount() {
         axios
@@ -14,13 +15,24 @@ export default class BookList extends React.Component{
                 this.setState({books: res.data});
             }).catch(error=> console.log(error))
     }
+
+
+
     render() {
+        const columns = [{
+            Header: 'Title',
+            accessor: 'title'
+        },{
+            Header: 'ISBN',
+            accessor: 'isbn'
+        },{
+            Header: 'Pages',
+            accessor: 'pages'
+        }]
         return(
-            <ul>
-                {this.state.books.map(book=> (
-                    <li key={book.id}>Name: {book.title}</li>
-                ))}
-            </ul>
+           <div>
+
+           </div>
         )
     }
 }
