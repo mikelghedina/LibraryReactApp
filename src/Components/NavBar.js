@@ -1,20 +1,30 @@
 import React, {Component} from "react";
-import {NavItem} from "react-bootstrap";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+
+
+
 
 class NavBar extends Component{
 
+
     render() {
         return(
-            <nav>
-                <ul>
-                    <NavItem item ="Books" tolink="/books"></NavItem>
-                    <NavItem item ="Authors" tolink="/authors"></NavItem>
-                    <NavItem item ="Quotes" tolink="/quotes"></NavItem>
-                    <NavItem item ="Users" tolink="/users"></NavItem>
-                    <NavItem item ="Registry" tolink="/registry"></NavItem>
-                </ul>
-            </nav>
-        )
+
+        <Navbar bg="light" expand="lg">
+            <Navbar.Brand href="/">Library</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                    <Nav.Link href="/">Home</Nav.Link>
+                    <Nav.Link href="/books">Books</Nav.Link>
+                    <Nav.Link href="/authors">Authors</Nav.Link>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
+    )
     }
 }
-export default NavBar;
+export default NavBar
+
+
