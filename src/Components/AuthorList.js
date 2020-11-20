@@ -5,6 +5,7 @@ import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 
 
+
 class AuthorList extends React.Component{
     constructor(props) {
         super(props);
@@ -18,7 +19,7 @@ class AuthorList extends React.Component{
             author:[{
                 id:'',
                 name:'',
-                lastName:''
+                lastName:'',
             }]
         }
     }

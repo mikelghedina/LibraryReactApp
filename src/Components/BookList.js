@@ -20,17 +20,15 @@ class BookList extends React.Component{
                 title: '',
                 isbn: '',
                 pages: '',
-
-                author:[{
+                author:{
                     id:'',
                     name:'',
                     lastName:''
-                }]
+                }
             }]
 
         }
     }
-
 
     componentDidMount() {
         axios
@@ -39,7 +37,6 @@ class BookList extends React.Component{
                 console.log(res);
                 this.setState({book: res.data});
             }).catch(error=> console.log(error))
-
     }
 
     render() {
@@ -54,6 +51,7 @@ class BookList extends React.Component{
                             <th>Title</th>
                             <th>ISBN</th>
                             <th>Pages</th>
+                            <th>Author</th>
                         </tr>
                     </thead>
                     <tbody> {this.state.book.map(b=>
@@ -61,6 +59,7 @@ class BookList extends React.Component{
                             <td>{b.title}</td>
                             <td>{b.isbn}</td>
                             <td>{b.pages}</td>
+                            <td>{b.author.name+" "+b.author.lastName}</td>
                         </tr>
                     )}
                     </tbody>
