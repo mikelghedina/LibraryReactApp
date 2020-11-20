@@ -8,33 +8,24 @@ class BookList extends React.Component{
     constructor(props) {
         super(props);
         this.state= {
-            columns : [
-                { field: 'id', headerName: 'ID', width: 70 },
-                { field: 'title', headerName: 'Title', width: 130 },
-                { field: 'isbn', headerName: 'ISBN', width: 130 },
-                { field: 'pages', headerName: 'Pages', width: 90 },
-                { field: 'author.name', headerName: 'Author', width: 90 }],
-
             book:[{
                 id: '',
                 title: '',
                 isbn: '',
                 pages: '',
-                author:{
+                author: {
                     id:'',
                     name:'',
                     lastName:''
                 }
             }]
-
-        }
+        };
     }
 
     componentDidMount() {
         axios
             .get('http://localhost:8080/api/books')
             .then(res => {
-                console.log(res);
                 this.setState({book: res.data});
             }).catch(error=> console.log(error))
     }
@@ -59,7 +50,7 @@ class BookList extends React.Component{
                             <td>{b.title}</td>
                             <td>{b.isbn}</td>
                             <td>{b.pages}</td>
-                            <td>{b.author.name+" "+b.author.lastName}</td>
+                            <td>{b.author.name+" "+ b.author.lastName}</td>
                         </tr>
                     )}
                     </tbody>
