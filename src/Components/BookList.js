@@ -9,17 +9,17 @@ class BookList extends React.Component{
         super(props);
         this.state= {
             book:[{
-                id: '',
-                title: '',
-                isbn: '',
-                pages: '',
-                author: {
+                id:'',
+                title:'',
+                isbn:'',
+                pages:'',
+                author:{
                     id:'',
                     name:'',
                     lastName:''
                 }
             }]
-        };
+        }
     }
 
     componentDidMount() {
@@ -31,6 +31,7 @@ class BookList extends React.Component{
     }
 
     render() {
+        debugger
         return(
             <div>
                 <Form inline>
@@ -50,7 +51,7 @@ class BookList extends React.Component{
                             <td>{b.title}</td>
                             <td>{b.isbn}</td>
                             <td>{b.pages}</td>
-                            <td>{b.author.name+" "+ b.author.lastName}</td>
+                            <td>{b.author.name+" "+b.author.lastName}</td>
                         </tr>
                     )}
                     </tbody>

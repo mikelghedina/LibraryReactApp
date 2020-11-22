@@ -10,12 +10,6 @@ class AuthorList extends React.Component{
     constructor(props) {
         super(props);
         this.state= {
-            columns : [
-                { field: 'id', headerName: 'ID', width: 70 },
-                { field: 'name', headerName: 'Name', width: 130 },
-                { field: 'lastName', headerName: 'Last Name', width: 130 }],
-
-
             author:[{
                 id:'',
                 name:'',
