@@ -3,6 +3,8 @@ import axios from 'axios';
 import Table from 'react-bootstrap/Table'
 import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
+import SearchFilter from "../Components/SearchFilter";
+import {Button} from "react-bootstrap";
 
 class BookList extends React.Component{
     constructor(props) {
@@ -18,7 +20,8 @@ class BookList extends React.Component{
                     name:'',
                     lastName:''
                 }
-            }]
+            }],
+            searchTerm:''
         }
     }
 
@@ -30,14 +33,20 @@ class BookList extends React.Component{
             }).catch(error=> console.log(error))
     }
 
+    handleDelete = () => {
+        const { book } = this.state;
+        axios.delete("http://localhost:8080/api/books{id}",{params: {id: book.id}})
+            .then(response => {
+                console.log(response);
+            });
+    };
     render() {
-        debugger
         return(
             <div>
                 <Form inline>
-                    <FormControl type="text" id="myInput" placeholder="Search" className="mr-sm-2" />
+                    <FormControl id="myInput" type="text" onChange={SearchFilter} placeholder="Search" className="mr-sm-2" />
                 </Form>
-                <Table striped bordered hover size="sm" id="myTable"  >
+                <Table striped bordered hover size="sm" id="myTable" >
                     <thead>
                         <tr >
                             <th>Title</th>
@@ -46,15 +55,18 @@ class BookList extends React.Component{
                             <th>Author</th>
                         </tr>
                     </thead>
-                    <tbody> {this.state.book.map(b=>
+                    <tbody>{this.state.book.map(b=>
                         <tr key={b.id}>
                             <td>{b.title}</td>
                             <td>{b.isbn}</td>
                             <td>{b.pages}</td>
                             <td>{b.author.name+" "+b.author.lastName}</td>
+                            <td>
+                                <Button variant="warning">Edit</Button>{' '}
+                                <Button variant="danger" onClick={this.handleDelete}>Delete</Button>
+                            </td>
                         </tr>
-                    )}
-                    </tbody>
+                    )}</tbody>
                 </Table>
             </div>
         )

@@ -10,7 +10,6 @@ class NavBar extends Component{
 
     render() {
         return(
-
         <Navbar bg="light" expand="lg">
             <Navbar.Brand href="/">Library</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -19,6 +18,9 @@ class NavBar extends Component{
                     <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="/books">Books</Nav.Link>
                     <Nav.Link href="/authors">Authors</Nav.Link>
+                    <Nav.Link href="/quotes">Quotes</Nav.Link>
+                    <Nav.Link href="/registries">Registry</Nav.Link>
+                    <Nav.Link href="/users">Users</Nav.Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
