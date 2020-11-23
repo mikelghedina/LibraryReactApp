@@ -13,9 +13,9 @@ class BookList extends React.Component{
             book:[{
                 id:'',
                 title:'',
-                isbn:'',
                 pages:'',
-                author:{
+                isbn:'',
+                author: {
                     id:'',
                     name:'',
                     lastName:''
