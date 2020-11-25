@@ -28,18 +28,29 @@ class BookList extends React.Component{
     componentDidMount() {
         axios
             .get('http://localhost:8080/api/books')
-            .then(res => {
-                this.setState({book: res.data});
+            .then(res =>res.data)
+            .then((data)=> {
+                this.setState({book: data})
             }).catch(error=> console.log(error))
     }
 
-    handleDelete = () => {
-        const { book } = this.state;
-        axios.delete("http://localhost:8080/api/books{id}",{params: {id: book.id}})
-            .then(response => {
-                console.log(response);
-            });
+    handleDelete =(id)=> {
+        axios.delete("http://localhost:8080/api/books"+ id)
+            .then(res => {
+                if(res.data !=null){
+                    this.setState({"show":true})
+                    setTimeout(()=> this.setState({"show":false}), 3000)
+                    //alert("Book deleted successfully")
+                    this.setState({
+                        books: this.state.books.filter(book=> book.id !== id)
+                    });
+                }
+            }).catch(error=> console.log(error))
     };
+
+    handlePost (){
+
+    }
     render() {
 
         return(
@@ -64,7 +75,7 @@ class BookList extends React.Component{
                             <td>{b.author.name+" "+b.author.lastName}</td>
                             <td>
                                 <Button variant="warning">Edit</Button>{' '}
-                                <Button variant="danger" onClick={this.handleDelete}>Delete</Button>
+                                <Button variant="danger" onClick={this.handleDelete.bind(this, b.id)}>Delete</Button>
                             </td>
                         </tr>
                     )}</tbody>
