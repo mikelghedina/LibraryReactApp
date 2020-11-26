@@ -3,7 +3,7 @@ import axios from 'axios';
 import Table from "react-bootstrap/Table";
 import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
-import SearchFilter from "../Components/SearchFilter";
+import SearchFilter from "../../Components/SearchFilter";
 import {Button} from "react-bootstrap";
 
 
@@ -28,12 +28,18 @@ class AuthorList extends React.Component{
             }).catch(error=> console.log(error))
     }
 
-    handleDelete = () => {
-        const { author } = this.state;
-        axios.delete("http://localhost:8080/api/authors{id}",{params: {id: author.id}})
-            .then(response => {
-                console.log(response);
-            });
+    handleDelete =(id)=> {
+        axios.delete("http://localhost:8080/api/authors"+ id)
+            .then(res => {
+                if(res.data !=null){
+                    this.setState({"show":true})
+                    setTimeout(()=> this.setState({"show":false}), 3000)
+                    //alert("Book deleted successfully")
+                    this.setState({
+                        author: this.state.author.filter(book=> book.id !== id)
+                    });
+                }
+            }).catch(error=> console.log(error))
     };
 
     render() {
@@ -55,7 +61,7 @@ class AuthorList extends React.Component{
                             <td>{a.lastName}</td>
                             <td>
                                 <Button variant="warning">Edit</Button>{' '}
-                                <Button variant="danger" onClick={this.handleDelete}>Delete</Button>
+                                <Button variant="danger" onClick={this.handleDelete.bind(this, a.id)}>Delete</Button>
                             </td>
                         </tr>
                     )}</tbody>

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Table from "react-bootstrap/Table";
 import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
-import SearchFilter from "../Components/SearchFilter";
+import SearchFilter from "../../Components/SearchFilter";
 import {Button} from "react-bootstrap";
 
 export default class QuoteList extends Component{

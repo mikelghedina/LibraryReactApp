@@ -2,13 +2,13 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React, {Component} from "react";
-import BookList from "./Contents/BookList";
-import AuthorList from "./Contents/AuthorList";
+import BookList from "./Contents/Book/BookList";
+import AuthorList from "./Contents/Author/AuthorList";
 import NavBar from "./Components/NavBar";
 import Home from "./Contents/Home";
-import QuoteList from "./Contents/QuoteList";
-import RegistryList from "./Contents/RegistryList";
-import UserList from "./Contents/UserList";
+import QuoteList from "./Contents/Quote/QuoteList";
+import RegistryList from "./Contents/Registry/RegistryList";
+import UserList from "./Contents/User/UserList";
 
 
 class App extends Component{

@@ -3,7 +3,7 @@ import axios from 'axios';
 import Table from 'react-bootstrap/Table'
 import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
-import SearchFilter from "../Components/SearchFilter";
+import SearchFilter from "../../Components/SearchFilter";
 import {Button} from "react-bootstrap";
 
 class BookList extends React.Component{
@@ -21,7 +21,12 @@ class BookList extends React.Component{
                     lastName:''
                 }
             }],
-            searchTerm:''
+            searchTerm:'',
+            newBook:[{
+                newTitle:'',
+                newIsbn:'',
+                newPages:''
+            }]
         }
     }
 
@@ -35,20 +40,27 @@ class BookList extends React.Component{
     }
 
     handleDelete =(id)=> {
-        axios.delete("http://localhost:8080/api/books"+ id)
+        axios.delete('http://localhost:8080/api/books'+ id)
             .then(res => {
                 if(res.data !=null){
                     this.setState({"show":true})
                     setTimeout(()=> this.setState({"show":false}), 3000)
                     //alert("Book deleted successfully")
                     this.setState({
-                        books: this.state.books.filter(book=> book.id !== id)
+                        book: this.state.book.filter(book=> book.id !== id)
                     });
                 }
             }).catch(error=> console.log(error))
     };
 
-    handlePost (){
+    handlePost =()=>{
+        const newBook = this.state.newBook
+
+        axios.post('http://localhost:8080/api/books', newBook)
+            .then(res => console.log(res))
+            .catch(error=> console.log(error))
+    }
+    handleEdit =()=>{
 
     }
     render() {
@@ -72,16 +84,30 @@ class BookList extends React.Component{
                             <td>{b.title}</td>
                             <td>{b.isbn}</td>
                             <td>{b.pages}</td>
-                            {b.author.name!==null||b.author.lastName!==null ?
+                            {b.author!=null?
                                 <td>{b.author.name + " " + b.author.lastName}</td>
-                                : this.setState({book:[{author:null}]})}
+                                : <td>""</td>}
                             <td>
                                 <Button variant="warning">Edit</Button>{' '}
                                 <Button variant="danger" onClick={this.handleDelete.bind(this, b.id)}>Delete</Button>
                             </td>
                         </tr>
                     )}</tbody>
+                    <tbody>
+                        <tr key={this.state.book.id}>
+                            <td><FormControl type="text" placeholder="Add title" value={this.state.newBook.newTitle}
+                                             onChange={(event) => this.setState({newTitle: event.target.value})}/></td>
+                            <td><FormControl type="text" placeholder="Add ISBN" value={this.state.newBook.newIsbn}
+                                             onChange={(event) => this.setState({newIsbn: event.target.value})}/></td>
+                            <td><FormControl type="Integer" placeholder="Add Pages" value={this.state.newBook.newPages}
+                                             onChange={(event) => this.setState({newPages: event.target.value})}/></td>
+                            <td><Form.Control as="select">
+                            <option>Select Author</option>
+                            </Form.Control></td>
+                        </tr>
+                    </tbody>
                 </Table>
+                <Button onClick={this.handlePost}>Add Book</Button>
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import axios from 'axios';
-import SearchFilter from "../Components/SearchFilter";
+import SearchFilter from "../../Components/SearchFilter";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Table from "react-bootstrap/Table";
