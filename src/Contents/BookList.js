@@ -72,9 +72,9 @@ class BookList extends React.Component{
                             <td>{b.title}</td>
                             <td>{b.isbn}</td>
                             <td>{b.pages}</td>
-                            {/*{b.author.name==null||b.author.lastName==null ?
+                            {b.author.name!==null||b.author.lastName!==null ?
                                 <td>{b.author.name + " " + b.author.lastName}</td>
-                                : b.author.name==='null' && b.author.lastName==='null'}*/}
+                                : this.setState({book:[{author:null}]})}
                             <td>
                                 <Button variant="warning">Edit</Button>{' '}
                                 <Button variant="danger" onClick={this.handleDelete.bind(this, b.id)}>Delete</Button>
