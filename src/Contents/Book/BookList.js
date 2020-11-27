@@ -43,7 +43,7 @@ class BookList extends React.Component{
     }
 
 
-    handleDelete =(id)=> {
+    handleDeleteBook =(id)=> {
         axios.delete('http://localhost:8080/api/books'+ id)
             .then(res => {
                 if(res.data !=null){
@@ -57,7 +57,7 @@ class BookList extends React.Component{
             }).catch(error=> console.log(error))
     };
 
-    handlePost =()=>{
+    handlePostBook =()=>{
         const newBook = {
             title: this.state.newTitle,
             isbn: this.state.newIsbn,
@@ -97,7 +97,7 @@ class BookList extends React.Component{
                                 : <td>""</td>}
                             <td>
                                 <Button variant="warning">Edit</Button>{' '}
-                                <Button variant="danger" onClick={this.handleDelete.bind(this, b.id)}>Delete</Button>
+                                <Button variant="danger" onClick={this.handleDeleteBook.bind(this, b.id)}>Delete</Button>
                             </td>
                         </tr>
                     )}</tbody>
@@ -120,7 +120,7 @@ class BookList extends React.Component{
                         </tr>
                     </tbody>
                 </Table>
-                <Button onClick={this.handlePost}>Add Book</Button>
+                <Button onClick={this.handlePostBook}>Add Book</Button>
             </div>
         )
     }

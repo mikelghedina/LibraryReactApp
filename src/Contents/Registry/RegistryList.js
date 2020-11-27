@@ -12,7 +12,7 @@ export default class RegistryList extends Component{
         super(props);
         this.state={
             registry:[{
-
+                id:''
             }]
         }
     }
@@ -38,12 +38,12 @@ export default class RegistryList extends Component{
                         <th>Last Name</th>
                     </tr>
                     </thead>
-                    <tbody>{this.state.registry.map(r=>
-                        <tr key={r.id}>
-                            <td>{r.name}</td>
-                            <td>{r.lastName}</td>
+                    <tbody>
+                        <tr>
+                            <td>asdas</td>
+                            <td>asdas</td>
                         </tr>
-                    )}</tbody>
+                    </tbody>
                 </Table>
             </div>
         )

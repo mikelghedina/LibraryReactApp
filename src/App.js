@@ -22,9 +22,9 @@ class App extends Component{
                       <Route exact path='/'><Home/></Route>
                       <Route exact path='/books'><BookList/></Route>
                       <Route exact path='/authors'><AuthorList/></Route>
-                      <Route exact path='/users'><QuoteList/></Route>
-                      <Route exact path='/quotes'><RegistryList/></Route>
-                      <Route exact path='/registries'><UserList/></Route>
+                      <Route exact path='/quotes'><QuoteList/></Route>
+                      <Route exact path='/registries'><RegistryList/></Route>
+                      <Route exact path='/users'><UserList/></Route>
                   </Switch>
               </div>
           </Router>

@@ -19,7 +19,8 @@ export default class QuoteList extends Component{
                     name:'',
                     lastName:''
                 }
-            }]
+            }],
+            newQuote:''
         }
     }
 
@@ -31,6 +32,28 @@ export default class QuoteList extends Component{
             }).catch(error=> console.log(error))
     };
 
+    handleDeleteQuote =(id)=> {
+        axios.delete('http://localhost:8080/api/quotes'+ id)
+            .then(res => {
+                if(res.data !=null){
+                    this.setState({"show":true})
+                    setTimeout(()=> this.setState({"show":false}), 3000)
+                    //alert("Book deleted successfully")
+                    this.setState({
+                        quote: this.state.quote.filter(quote=> quote.id !== id)
+                    });
+                }
+            }).catch(error=> console.log(error))
+    };
+
+    handlePostQuote =()=>{
+        const newQuote = {
+            content: this.state.newQuote,
+        }
+        axios.post('http://localhost:8080/api/quotes', newQuote)
+            .then(res =>console.log(res.data))
+            .catch(error=> console.log(error))
+    }
     render() {
         return(
             <div>
@@ -47,14 +70,28 @@ export default class QuoteList extends Component{
                     <tbody>{this.state.quote.map(q=>
                         <tr key={q.id}>
                             <td>{q.content}</td>
-                            <td>{q.author.name+" "+q.author.lastName}</td>
+                            {q.author!=null?
+                                <td>{q.author.name + " " + q.author.lastName}</td>
+                                : <td>""</td>}
                             <td>
                                 <Button variant="warning">Edit</Button>{' '}
-                                <Button variant="danger">Delete</Button>
+                                <Button variant="danger" onClick={this.handleDeleteQuote.bind(this, q.id)}>Delete</Button>
                             </td>
                         </tr>
                     )}</tbody>
+                    <tbody>
+                    <tr key={this.state.quote.id}>
+                        <td><FormControl type="text" placeholder="Add title" value={this.state.newQuote}
+                                         onChange={(event) => this.setState({newQuote: event.target.value})}/></td>
+                        <td><Form>
+                            <Form.Control as="select" custom >
+                                <option>1</option>
+                            </Form.Control>
+                        </Form></td>
+                    </tr>
+                    </tbody>
                 </Table>
+                <Button onClick={this.handlePostQuote}>Add Quote</Button>
             </div>
         )
     }

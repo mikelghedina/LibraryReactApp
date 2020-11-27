@@ -40,8 +40,8 @@ export default class UserList extends Component{
                     </thead>
                     <tbody>{this.state.user.map(u=>
                         <tr key={u.id}>
-                            <td>{}</td>
-                            <td>{}</td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     )}</tbody>
                 </Table>

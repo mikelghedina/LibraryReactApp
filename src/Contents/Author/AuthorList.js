@@ -15,7 +15,10 @@ class AuthorList extends React.Component{
                 id:'',
                 name:'',
                 lastName:'',
-            }]
+            }],
+
+            newName:'',
+            newLastName:''
         }
     }
 
@@ -23,24 +26,33 @@ class AuthorList extends React.Component{
         axios
             .get('http://localhost:8080/api/authors')
             .then(res => {
-                console.log(res);
+                //console.log(res);
                 this.setState({author: res.data});
             }).catch(error=> console.log(error))
     }
 
-    handleDelete =(id)=> {
-        axios.delete("http://localhost:8080/api/authors"+ id)
+    handleDeleteAuthor =(id)=> {
+        axios.delete('http://localhost:8080/api/authors'+ id)
             .then(res => {
                 if(res.data !=null){
                     this.setState({"show":true})
                     setTimeout(()=> this.setState({"show":false}), 3000)
-                    //alert("Book deleted successfully")
                     this.setState({
-                        author: this.state.author.filter(book=> book.id !== id)
+                        author: this.state.author.filter(author=> author.id !== id)
                     });
                 }
             }).catch(error=> console.log(error))
     };
+
+    handlePostAuthor =()=>{
+        const newAuthor = {
+            name: this.state.newName,
+            lastName: this.state.newLastName
+        }
+        axios.post('http://localhost:8080/api/authors', newAuthor)
+            .then(res =>console.log(res.data))
+            .catch(error=> console.log(error))
+    }
 
 
     render() {
@@ -62,11 +74,20 @@ class AuthorList extends React.Component{
                             <td>{a.lastName}</td>
                             <td>
                                 <Button variant="warning">Edit</Button>{' '}
-                                <Button variant="danger" onClick={this.handleDelete.bind(this, a.id)}>Delete</Button>
+                                <Button variant="danger" onClick={this.handleDeleteAuthor.bind(this, a.id)}>Delete</Button>
                             </td>
                         </tr>
                     )}</tbody>
+                    <tbody>
+                    <tr key={this.state.author.id}>
+                        <td><FormControl type="text" placeholder="Add Name" value={this.state.newName}
+                                         onChange={(event) => this.setState({newName: event.target.value})}/></td>
+                        <td><FormControl type="text" placeholder="Add Last Name" value={this.state.newLastName}
+                                         onChange={(event) => this.setState({newLastName: event.target.value})}/></td>
+                    </tr>
+                    </tbody>
                 </Table>
+                <Button onClick={this.handlePostAuthor}>Add Author</Button>
             </div>
         )
     }
