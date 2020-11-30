@@ -2,13 +2,13 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import React, {Component} from "react";
-import BookList from "./Contents/Book/BookList";
-import AuthorList from "./Contents/Author/AuthorList";
-import NavBar from "./Components/NavBar";
-import Home from "./Contents/Home";
-import QuoteList from "./Contents/Quote/QuoteList";
-import RegistryList from "./Contents/Registry/RegistryList";
-import UserList from "./Contents/User/UserList";
+import BookList from "./Components/Book/BookList";
+import AuthorList from "./Components/Author/AuthorList";
+import NavBar from "./Utils/NavBar";
+import Home from "./Components/Home";
+import QuoteList from "./Components/Quote/QuoteList";
+import RegistryList from "./Components/Registry/RegistryList";
+import UserList from "./Components/User/UserList";
 import axios from 'axios'
 
 axios.defaults.baseURL='http://localhost:8080/api'
