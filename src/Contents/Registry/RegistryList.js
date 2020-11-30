@@ -19,7 +19,7 @@ export default class RegistryList extends Component{
 
     componentDidMount() {
         axios
-            .get('http://localhost:8080/api/registries')
+            .get('/registries')
             .then(res => {
                 this.setState({registry: res.data})
             }).catch(error=> console.log(error))

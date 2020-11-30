@@ -5,6 +5,7 @@ import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 import SearchFilter from "../../Components/SearchFilter";
 import {Button} from "react-bootstrap";
+import NewAuthor from "./NewAuthor";
 
 
 class AuthorList extends React.Component{
@@ -15,16 +16,13 @@ class AuthorList extends React.Component{
                 id:'',
                 name:'',
                 lastName:'',
-            }],
-
-            newName:'',
-            newLastName:''
+            }]
         }
     }
 
     componentDidMount() {
         axios
-            .get('http://localhost:8080/api/authors')
+            .get('/authors')
             .then(res => {
                 //console.log(res);
                 this.setState({author: res.data});
@@ -32,7 +30,7 @@ class AuthorList extends React.Component{
     }
 
     handleDeleteAuthor =(id)=> {
-        axios.delete('http://localhost:8080/api/authors'+ id)
+        axios.delete('/authors'+ id)
             .then(res => {
                 if(res.data !=null){
                     this.setState({"show":true})
@@ -43,17 +41,6 @@ class AuthorList extends React.Component{
                 }
             }).catch(error=> console.log(error))
     };
-
-    handlePostAuthor =()=>{
-        const newAuthor = {
-            name: this.state.newName,
-            lastName: this.state.newLastName
-        }
-        axios.post('http://localhost:8080/api/authors', newAuthor)
-            .then(res =>console.log(res.data))
-            .catch(error=> console.log(error))
-    }
-
 
     render() {
         return(
@@ -79,15 +66,10 @@ class AuthorList extends React.Component{
                         </tr>
                     )}</tbody>
                     <tbody>
-                    <tr key={this.state.author.id}>
-                        <td><FormControl type="text" placeholder="Add Name" value={this.state.newName}
-                                         onChange={(event) => this.setState({newName: event.target.value})}/></td>
-                        <td><FormControl type="text" placeholder="Add Last Name" value={this.state.newLastName}
-                                         onChange={(event) => this.setState({newLastName: event.target.value})}/></td>
-                    </tr>
+                        <NewAuthor/>
                     </tbody>
                 </Table>
-                <Button onClick={this.handlePostAuthor}>Add Author</Button>
+
             </div>
         )
     }

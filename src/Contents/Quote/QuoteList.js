@@ -5,6 +5,7 @@ import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 import SearchFilter from "../../Components/SearchFilter";
 import {Button} from "react-bootstrap";
+import NewQuote from "./NewQuote";
 
 export default class QuoteList extends Component{
 
@@ -19,21 +20,20 @@ export default class QuoteList extends Component{
                     name:'',
                     lastName:''
                 }
-            }],
-            newQuote:''
+            }]
         }
     }
 
     componentDidMount() {
         axios
-            .get('http://localhost:8080/api/quotes')
+            .get('/quotes')
             .then(res=>{
                 this.setState({quote: res.data})
             }).catch(error=> console.log(error))
     };
 
     handleDeleteQuote =(id)=> {
-        axios.delete('http://localhost:8080/api/quotes'+ id)
+        axios.delete('/quotes'+ id)
             .then(res => {
                 if(res.data !=null){
                     this.setState({"show":true})
@@ -46,14 +46,7 @@ export default class QuoteList extends Component{
             }).catch(error=> console.log(error))
     };
 
-    handlePostQuote =()=>{
-        const newQuote = {
-            content: this.state.newQuote,
-        }
-        axios.post('http://localhost:8080/api/quotes', newQuote)
-            .then(res =>console.log(res.data))
-            .catch(error=> console.log(error))
-    }
+
     render() {
         return(
             <div>
@@ -80,18 +73,9 @@ export default class QuoteList extends Component{
                         </tr>
                     )}</tbody>
                     <tbody>
-                    <tr key={this.state.quote.id}>
-                        <td><FormControl type="text" placeholder="Add title" value={this.state.newQuote}
-                                         onChange={(event) => this.setState({newQuote: event.target.value})}/></td>
-                        <td><Form>
-                            <Form.Control as="select" custom >
-                                <option>1</option>
-                            </Form.Control>
-                        </Form></td>
-                    </tr>
+                        <NewQuote/>
                     </tbody>
                 </Table>
-                <Button onClick={this.handlePostQuote}>Add Quote</Button>
             </div>
         )
     }

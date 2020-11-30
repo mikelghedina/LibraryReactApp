@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import SearchFilter from "../../Components/SearchFilter";
 import {Button} from "react-bootstrap";
 import AuthorList from "../Author/AuthorList";
+import NewBook from "./NewBook";
 
 
 class BookList extends React.Component{
@@ -24,18 +25,12 @@ class BookList extends React.Component{
                 }
             }],
             searchTerm:'',
-
-            newTitle:'',
-            newIsbn:'',
-            newPages:'',
-            selectedAuthor:[],
-
         }
     }
 
     componentDidMount() {
         axios
-            .get('http://localhost:8080/api/books')
+            .get('/books')
             .then(res =>res.data)
             .then((data)=> {
                 this.setState({book: data})
@@ -44,7 +39,7 @@ class BookList extends React.Component{
 
 
     handleDeleteBook =(id)=> {
-        axios.delete('http://localhost:8080/api/books'+ id)
+        axios.delete('/books'+ id)
             .then(res => {
                 if(res.data !=null){
                     this.setState({"show":true})
@@ -56,20 +51,6 @@ class BookList extends React.Component{
                 }
             }).catch(error=> console.log(error))
     };
-
-    handlePostBook =()=>{
-        const newBook = {
-            title: this.state.newTitle,
-            isbn: this.state.newIsbn,
-            pages: this.state.newPages
-        }
-        axios.post('http://localhost:8080/api/books', newBook)
-            .then(res =>console.log(res.data))
-            .catch(error=> console.log(error))
-    }
-    handleEdit =()=>{
-
-    }
 
     render() {
 
@@ -102,25 +83,9 @@ class BookList extends React.Component{
                         </tr>
                     )}</tbody>
                     <tbody>
-                        <tr key={this.state.book.id}>
-                            <td><FormControl type="text" placeholder="Add title" value={this.state.newTitle}
-                                             onChange={(event) => this.setState({newTitle: event.target.value})}/></td>
-                            <td><FormControl type="text" placeholder="Add ISBN" value={this.state.newIsbn}
-                                             onChange={(event) => this.setState({newIsbn: event.target.value})}/></td>
-                            <td><FormControl type="Integer" placeholder="Add Pages" value={this.state.newPages}
-                                             onChange={(event) => this.setState({newPages: event.target.value})}/></td>
-                            <td><Form>
-                                <Form.Control as="select" custom >
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                </Form.Control>
-                            </Form></td>
-                        </tr>
+                        <NewBook/>
                     </tbody>
                 </Table>
-                <Button onClick={this.handlePostBook}>Add Book</Button>
             </div>
         )
     }

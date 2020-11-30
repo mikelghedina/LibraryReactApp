@@ -9,7 +9,9 @@ import Home from "./Contents/Home";
 import QuoteList from "./Contents/Quote/QuoteList";
 import RegistryList from "./Contents/Registry/RegistryList";
 import UserList from "./Contents/User/UserList";
+import axios from 'axios'
 
+axios.defaults.baseURL='http://localhost:8080/api'
 
 class App extends Component{
   render() {
