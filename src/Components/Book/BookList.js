@@ -52,6 +52,11 @@ class BookList extends React.Component{
             }).catch(error=> console.log(error))
     };
 
+    updateState=()=>{
+        const books = [...this.state.book]
+        this.setState({book: books})
+    }
+
     render() {
 
         return(
@@ -83,7 +88,7 @@ class BookList extends React.Component{
                         </tr>
                     )}</tbody>
                     <tbody>
-                        <NewBook/>
+                        <NewBook updateState={this.updateState}/>
                     </tbody>
                 </Table>
             </div>

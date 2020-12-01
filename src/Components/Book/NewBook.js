@@ -5,10 +5,13 @@ import Form from "react-bootstrap/Form";
 import {Button} from "react-bootstrap";
 
 class NewBook extends Component{
-    state={
-        title:'',
-        isbn:'',
-        pages:''
+    constructor(props) {
+        super(props);
+        this.state={
+            title:'',
+            isbn:'',
+            pages:''
+        }
     }
 
     postNewBookHandler=()=>{
@@ -18,7 +21,9 @@ class NewBook extends Component{
             pages: this.state.pages
         }
         axios.post('/books', data)
-            .then(res => console.log(res.data))
+            .then(res => {
+                console.log(res.data)
+                this.props.updateState()})
             .catch(error=> console.log(error));
     }
 
