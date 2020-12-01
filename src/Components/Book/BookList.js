@@ -5,19 +5,20 @@ import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 import SearchFilter from "../../Utils/SearchFilter";
 import {Button} from "react-bootstrap";
-import AuthorList from "../Author/AuthorList";
 import NewBook from "./NewBook";
 
 
 class BookList extends React.Component{
     constructor(props) {
-        super(props, AuthorList);
+        super(props);
         this.state= {
             book:[{
                 id:'',
                 title:'',
                 pages:'',
                 isbn:'',
+                image:'',
+                synopsis:'',
                 author: {
                     id:'',
                     name:'',
@@ -31,12 +32,11 @@ class BookList extends React.Component{
     componentDidMount() {
         axios
             .get('/books')
-            .then(res =>res.data)
-            .then((data)=> {
-                this.setState({book: data})
+            .then(res => {
+                //console.log(res);
+                this.setState({book: res.data});
             }).catch(error=> console.log(error))
     }
-
 
     handleDeleteBook =(id)=> {
         axios.delete('/books'+ id)
@@ -77,7 +77,7 @@ class BookList extends React.Component{
                                 <td>{b.author.name + " " + b.author.lastName}</td>
                                 : <td>""</td>}
                             <td>
-                                <Button variant="warning">Edit</Button>{' '}
+                                <Button variant="warning">Details</Button>{' '}
                                 <Button variant="danger" onClick={this.handleDeleteBook.bind(this, b.id)}>Delete</Button>
                             </td>
                         </tr>
