@@ -6,36 +6,20 @@ import Form from "react-bootstrap/Form";
 import SearchFilter from "../../Utils/SearchFilter";
 import {Button} from "react-bootstrap";
 import NewBook from "./NewBook";
+import {connect} from 'react-redux';
+import {getBooks} from "../../store/actions/bookActions";
 
 
 class BookList extends React.Component{
     constructor(props) {
         super(props);
         this.state= {
-            book:[{
-                id:'',
-                title:'',
-                pages:'',
-                isbn:'',
-                image:'',
-                synopsis:'',
-                author: {
-                    id:'',
-                    name:'',
-                    lastName:''
-                }
-            }],
             searchTerm:'',
         }
     }
 
     componentDidMount() {
-        axios
-            .get('/books')
-            .then(res => {
-                //console.log(res);
-                this.setState({book: res.data});
-            }).catch(error=> console.log(error))
+        this.props.getBooks()
     }
 
     handleDeleteBook =(id)=> {
@@ -52,10 +36,7 @@ class BookList extends React.Component{
             }).catch(error=> console.log(error))
     };
 
-    updateState=()=>{
-        const books = [...this.state.book]
-        this.setState({book: books})
-    }
+
 
     render() {
 
@@ -73,7 +54,7 @@ class BookList extends React.Component{
                             <th>Author</th>
                         </tr>
                     </thead>
-                    <tbody>{this.state.book.map(b=>
+                    <tbody>{this.props.book.map(b=>
                         <tr key={b.id}>
                             <td>{b.title}</td>
                             <td>{b.isbn}</td>
@@ -95,4 +76,6 @@ class BookList extends React.Component{
         )
     }
 }
-export default BookList
+const mapStateToProps  = (state) => ({book:state.book})
+
+export default connect(mapStateToProps, {getBooks})(BookList)
