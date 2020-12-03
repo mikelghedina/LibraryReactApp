@@ -21,9 +21,8 @@ class NewBook extends Component{
             pages: this.state.pages
         }
         axios.post('/books', data)
-            .then(res => {
-                console.log(res.data)
-                this.props.updateState()})
+            .then(res =>
+                console.log(res.data))
             .catch(error=> console.log(error));
     }
 

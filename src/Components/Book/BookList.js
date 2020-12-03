@@ -7,7 +7,8 @@ import SearchFilter from "../../Utils/SearchFilter";
 import {Button} from "react-bootstrap";
 import NewBook from "./NewBook";
 import {connect} from 'react-redux';
-import {getBooks} from "../../store/actions/bookActions";
+import {initBooks} from "../../store/actions/Books";
+
 
 
 class BookList extends React.Component{
@@ -19,21 +20,21 @@ class BookList extends React.Component{
     }
 
     componentDidMount() {
-        this.props.getBooks()
+        this.props.onInitBooks();
     }
 
     handleDeleteBook =(id)=> {
         axios.delete('/books'+ id)
-            .then(res => {
-                if(res.data !=null){
+            .then(res => console.log(res.data)
+                /*if(res.data !=null){
                     this.setState({"show":true})
                     setTimeout(()=> this.setState({"show":false}), 3000)
                     //alert("Book deleted successfully")
                     this.setState({
                         book: this.state.book.filter(book=> book.id !== id)
                     });
-                }
-            }).catch(error=> console.log(error))
+                }*/
+            ).catch(error=> console.log(error))
     };
 
 
@@ -69,13 +70,22 @@ class BookList extends React.Component{
                         </tr>
                     )}</tbody>
                     <tbody>
-                        <NewBook updateState={this.updateState}/>
+                        <NewBook/>
                     </tbody>
                 </Table>
             </div>
         )
     }
 }
-const mapStateToProps  = (state) => ({book:state.book})
+const mapStateToProps = state =>{
+    return{
+        books: state.book
+    }
+}
+const mapDispatchToProps = dispatch =>{
+    return{
+        onInitBooks: ()=> dispatch(initBooks)
+    }
+}
 
-export default connect(mapStateToProps, {getBooks})(BookList)
+export default connect(mapStateToProps, mapDispatchToProps())(BookList)
