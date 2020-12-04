@@ -4,15 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
-import {applyMiddleware, compose, createStore} from "redux";
-import bookReducer from './store/reducers/bookReducer'
-import thunk from "redux-thunk";
+import store from "./store/store";
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(bookReducer, composeEnhancers(
-    applyMiddleware(thunk)
-));
+
 
 ReactDOM.render(
   <React.StrictMode>
