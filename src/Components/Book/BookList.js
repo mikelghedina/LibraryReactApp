@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import SearchFilter from "../../Utils/SearchFilter";
 import NewBook from "./NewBook";
 import {connect} from "react-redux";
-import {addBook, deleteBook, fetchBooks} from "../../store/actions/bookActions";
+import {deleteBook, fetchBooks} from "../../store/actions/bookActions";
 import {Button} from "react-bootstrap";
 
 
