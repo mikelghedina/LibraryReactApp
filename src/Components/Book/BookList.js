@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import SearchFilter from "../../Utils/SearchFilter";
 import NewBook from "./NewBook";
 import {connect} from "react-redux";
-import {fetchBooks} from "../../store/actions/bookActions";
+import {addBook, deleteBook, fetchBooks} from "../../store/actions/bookActions";
 import {Button} from "react-bootstrap";
 
 
@@ -82,7 +82,8 @@ const mapStateToProps =(state)=>{
 }
 const mapDispatchToProps = dispatch =>{
     return{
-        fetchBooks:()=>dispatch(fetchBooks())
+        fetchBooks:()=>dispatch(fetchBooks()),
+        deleteBook:(bookId)=>dispatch(deleteBook(bookId))
     }
 }
 
