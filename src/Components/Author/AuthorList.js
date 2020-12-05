@@ -1,35 +1,21 @@
 import React from 'react';
-import axios from 'axios';
 import Table from "react-bootstrap/Table";
 import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 import SearchFilter from "../../Utils/SearchFilter";
 import {Button} from "react-bootstrap";
 import NewAuthor from "./NewAuthor";
+import {connect} from 'react-redux'
+import {deleteAuthor, fetchAuthors} from "../../store/actions/authorActions";
 
 
 class AuthorList extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state= {
-            author:[{
-                id:'',
-                name:'',
-                lastName:'',
-            }]
-        }
-    }
 
     componentDidMount() {
-        axios
-            .get('/authors')
-            .then(res => {
-                //console.log(res);
-                this.setState({author: res.data});
-            }).catch(error=> console.log(error))
+        this.props.fetchAuthors()
     }
 
-    handleDeleteAuthor =(id)=> {
+    /*handleDeleteAuthor =(id)=> {
         axios.delete('/authors'+ id)
             .then(res => {
                 if(res.data !=null){
@@ -40,7 +26,7 @@ class AuthorList extends React.Component{
                     });
                 }
             }).catch(error=> console.log(error))
-    };
+    };*/
 
     render() {
         return(
@@ -55,13 +41,13 @@ class AuthorList extends React.Component{
                         <th>Last Name</th>
                     </tr>
                     </thead>
-                    <tbody>{this.state.author.map(a=>
+                    <tbody>{this.props.author.map(a=>
                         <tr key={a.id}>
                             <td>{a.name}</td>
                             <td>{a.lastName}</td>
                             <td>
                                 <Button variant="warning">Edit</Button>{' '}
-                                <Button variant="danger" onClick={this.handleDeleteAuthor.bind(this, a.id)}>Delete</Button>
+                                <Button variant="danger" onClick={this.props.deleteAuthor.bind(this, a.id)}>Delete</Button>
                             </td>
                         </tr>
                     )}</tbody>
@@ -69,9 +55,20 @@ class AuthorList extends React.Component{
                         <NewAuthor/>
                     </tbody>
                 </Table>
-
             </div>
         )
     }
 }
-export default AuthorList
+
+const mapStateToProps=(state)=>{
+    return{
+        author:state.author.authorsData
+    }
+}
+const mapDispatchToProps=dispatch=>{
+    return{
+        fetchAuthors:()=>dispatch(fetchAuthors()),
+        deleteAuthor:(authorId)=> dispatch(deleteAuthor(authorId))
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(AuthorList)

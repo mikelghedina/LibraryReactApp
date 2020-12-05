@@ -1,38 +1,31 @@
 import React, {Component} from "react";
-import axios from "axios";
 import FormControl from "react-bootstrap/FormControl";
 import {Button} from "react-bootstrap";
+import {connect} from "react-redux";
+import {addAuthor} from "../../store/actions/authorActions";
 
 
 class NewAuthor extends Component{
 
-    state={
-        name:'',
-        lastName:'',
-
-    }
-
-    handlePostAuthor =()=>{
-        const newAuthor = {
-            name: this.state.name,
-            lastName: this.state.lastName
-        }
-        axios.post('/authors', newAuthor)
-            .then(res =>console.log(res.data))
-            .catch(error=> console.log(error))
-    }
-
     render() {
+        const newAuthor = {
+            name: '',
+            lastName: ''
+        }
         return (
             <tr>
-                <td><FormControl type="text" placeholder="Add Name" value={this.state.name}
-                                 onChange={(event) => this.setState({name: event.target.value})}/></td>
-                <td><FormControl type="text" placeholder="Add Last Name" value={this.state.lastName}
-                                 onChange={(event) => this.setState({lastName: event.target.value})}/></td>
-                <td><Button onClick={this.handlePostAuthor}>Add Author</Button></td>
+                <td><FormControl type="text" placeholder="Add Name" value={newAuthor.name}
+                                 onChange={(event) => ({name: event.target.value})}/></td>
+                <td><FormControl type="text" placeholder="Add Last Name" value={newAuthor.lastName}
+                                 onChange={(event) => ({lastName: event.target.value})}/></td>
+                <td><Button onClick={this.props.addAuthor.bind(this, newAuthor)}>Add Author</Button></td>
             </tr>
         );
     }
 }
-
-export default NewAuthor
+const mapDispatchToProps=dispatch=>{
+    return{
+        addAuthor:(author)=>dispatch(addAuthor(author))
+    }
+}
+export default connect(mapDispatchToProps)(NewAuthor)

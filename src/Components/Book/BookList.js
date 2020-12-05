@@ -11,26 +11,20 @@ import {Button} from "react-bootstrap";
 
 
 class BookList extends React.Component{
-    /*constructor(props) {
-        super(props);
-        this.state= {
 
-        }
-    }
-
-    handleDeleteBook =(id)=> {
-        axios.delete('/books'+ id)
-            .then(res => console.log(res.data)
-                /!*if(res.data !=null){
-                    this.setState({"show":true})
-                    setTimeout(()=> this.setState({"show":false}), 3000)
-                    //alert("Book deleted successfully")
-                    this.setState({
-                        book: this.state.book.filter(book=> book.id !== id)
-                    });
-                }*!/
-            ).catch(error=> console.log(error))
-    };*/
+    /* handleDeleteBook =(id)=> {
+         axios.delete('/books'+ id)
+             .then(res => console.log(res.data)
+                 /!*if(res.data !=null){
+                     this.setState({"show":true})
+                     setTimeout(()=> this.setState({"show":false}), 3000)
+                     //alert("Book deleted successfully")
+                     this.setState({
+                         book: this.state.book.filter(book=> book.id !== id)
+                     });
+                 }*!/
+             ).catch(error=> console.log(error))
+     };*/
 
     componentDidMount() {
         this.props.fetchBooks()
@@ -52,7 +46,7 @@ class BookList extends React.Component{
                             <th>Author</th>
                         </tr>
                     </thead>
-                    <tbody>{this.props.book.map(b=>
+                    <tbody>{this.props.bookList.map(b=>
                     <tr key={b.id}>
                         <td>{b.title}</td>
                         <td>{b.isbn}</td>
@@ -62,7 +56,7 @@ class BookList extends React.Component{
                             : <td>""</td>}
                         <td>
                             <Button variant="warning">Details</Button>{' '}
-                            <Button variant="danger" >Delete</Button>
+                            <Button variant="danger" onClick={this.props.deleteBook.bind(this, b.id)}>Delete</Button>
                         </td>
                     </tr>)}
                     </tbody>
@@ -75,9 +69,9 @@ class BookList extends React.Component{
     }
 }
 
-const mapStateToProps =(state)=>{
+const mapStateToProps =state=>{
     return{
-        book:state.booksData
+        bookList:state.book.booksData
     }
 }
 const mapDispatchToProps = dispatch =>{
@@ -87,4 +81,4 @@ const mapDispatchToProps = dispatch =>{
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookList)
+export default connect(mapStateToProps,mapDispatchToProps)(BookList)

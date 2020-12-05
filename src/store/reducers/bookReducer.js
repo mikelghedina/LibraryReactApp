@@ -13,7 +13,7 @@ import {
 
 const initialState = {
     loading: false,
-    booksData: [],
+    booksData:[],
     error: ''
 }
 
@@ -33,7 +33,7 @@ const bookReducer = (state = initialState, action) => {
         case FETCH_BOOKS_FAILURE:
             return {
                 loading: false,
-                booksData: [],
+                booksData:[],
                 error: action.payload
             }
         case POST_BOOK_REQUEST:

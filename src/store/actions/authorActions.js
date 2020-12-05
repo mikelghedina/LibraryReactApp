@@ -48,7 +48,7 @@ export const deleteAuthor=(id)=>{
         axios.delete('http://localhost:8080/api/authors'+id)
             .then(response=>{
                 if(response.data !=null){
-
+                    dispatch(fetchAuthors())
                 }
             })
             .catch(error=>{
