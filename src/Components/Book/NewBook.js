@@ -7,33 +7,47 @@ import {connect} from "react-redux";
 
 class NewBook extends Component{
 
+    state={
+        id:'',
+        title:'',
+        isbn:'',
+        pages:''
+        //author:[]
+    }
+
+    handleOnClickAddBook=event=>{
+        event.preventDefault();
+        console.log(this.state)
+        this.props.addBook.bind(this, this.state);
+        this.setState(
+            {
+                title: '',
+                isbn: '',
+                pages: '',
+            })
+    }
     render() {
-        const newBook={
-            title:'',
-            isbn:'',
-            pages:'',
-            author:[]
-        }
         return(
             <tr>
-                <td><FormControl type="text" placeholder="Add title" value={newBook.title}
-                                 onChange={(event) => ({title: event.target.value})}/></td>
-                <td><FormControl type="text" placeholder="Add ISBN" value={newBook.isbn}
-                                 onChange={(event) => ({isbn: event.target.value})}/></td>
-                <td><FormControl type="Integer" placeholder="Add Pages" value={newBook.pages}
-                                 onChange={(event) => ({pages: event.target.value})}/></td>
-                <td><Form>
+                <td><FormControl type="text" placeholder="Add title" value={this.state.title}
+                                 onChange={(event) => (this.setState({title: event.target.value}))}/></td>
+                <td><FormControl type="text" placeholder="Add ISBN" value={this.state.isbn}
+                                 onChange={(event) => (this.setState({isbn: event.target.value}))}/></td>
+                <td><FormControl type="Integer" placeholder="Add Pages" value={this.state.pages}
+                                 onChange={(event) => (this.setState({pages: event.target.value}))}/></td>
+                <td>
                     <Form.Control as="select" custom>{this.props.author.map(a=>
                         <option>{a.name + " " + a.lastName}</option>
                     )}</Form.Control>
-                </Form></td>
-                <td><Button onClick={this.props.addBook.bind(this, newBook)}>Add Book</Button></td>
+                </td>
+                <td><Button onClick={this.props.addBook.bind(this, this.state)}>Add Book</Button></td>
             </tr>
         )
     }
 }
 const mapStateToProps=state=>{
     return{
+        book:state.book.booksData,
         author:state.author.authorsData
     }
 }

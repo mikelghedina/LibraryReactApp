@@ -6,7 +6,6 @@ import {
     POST_BOOK_SUCCESS,
     POST_BOOK_FAILURE,
     DELETE_BOOK_REQUEST,
-    DELETE_BOOK_SUCCESS,
     DELETE_BOOK_FAILURE
 } from '../actions/bookTypes'
 
@@ -43,9 +42,8 @@ const bookReducer = (state = initialState, action) => {
             }
         case POST_BOOK_SUCCESS:
             return {
-                loading: false,
-                booksData: action.payload,
-                error: ''
+                ...state,
+                booksData: [...state.booksData, action.payload]
             }
         case POST_BOOK_FAILURE:
             return {
@@ -57,12 +55,6 @@ const bookReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true
-            }
-        case DELETE_BOOK_SUCCESS:
-            return {
-                loading: false,
-                booksData: action.payload,
-                error: ''
             }
         case DELETE_BOOK_FAILURE:
             return {

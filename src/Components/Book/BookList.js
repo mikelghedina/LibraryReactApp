@@ -12,20 +12,6 @@ import {Button} from "react-bootstrap";
 
 class BookList extends React.Component{
 
-    /* handleDeleteBook =(id)=> {
-         axios.delete('/books'+ id)
-             .then(res => console.log(res.data)
-                 /!*if(res.data !=null){
-                     this.setState({"show":true})
-                     setTimeout(()=> this.setState({"show":false}), 3000)
-                     //alert("Book deleted successfully")
-                     this.setState({
-                         book: this.state.book.filter(book=> book.id !== id)
-                     });
-                 }*!/
-             ).catch(error=> console.log(error))
-     };*/
-
     componentDidMount() {
         this.props.fetchBooks()
     }
@@ -33,7 +19,6 @@ class BookList extends React.Component{
     render() {
         return(
             <div>
-                {console.log(this.props.book)}
                 <Form inline>
                     <FormControl id="myInput" type="text" onChange={SearchFilter} placeholder="Search" className="mr-sm-2" />
                 </Form>
