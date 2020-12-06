@@ -33,5 +33,4 @@ class NewQuote extends Component{
         )
     }
 }
-
 export default NewQuote

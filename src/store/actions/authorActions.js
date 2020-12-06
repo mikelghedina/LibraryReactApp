@@ -25,7 +25,6 @@ export const fetchAuthors =() =>{
             })
     }
 }
-
 export const addAuthor=(author)=>{
     return(dispatch)=>{
         dispatch(postAuthorRequest())
@@ -45,7 +44,7 @@ export const addAuthor=(author)=>{
 export const deleteAuthor=(id)=>{
     return(dispatch)=>{
         dispatch(deleteAuthorRequest())
-        axios.delete('http://localhost:8080/api/authors'+id)
+        axios.delete('http://localhost:8080/api/authors'+ id)
             .then(response=>{
                 if(response.data !=null){
                     dispatch(fetchAuthors())

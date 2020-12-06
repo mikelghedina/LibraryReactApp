@@ -7,6 +7,7 @@ import {addAuthor} from "../../store/actions/authorActions";
 
 class NewAuthor extends Component{
 
+
     render() {
         const newAuthor = {
             name: '',

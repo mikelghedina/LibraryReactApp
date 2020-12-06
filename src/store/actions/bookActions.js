@@ -3,7 +3,6 @@ import {
     FETCH_BOOKS_SUCCESS,
     FETCH_BOOKS_FAILURE,
     POST_BOOK_REQUEST,
-    POST_BOOK_SUCCESS,
     POST_BOOK_FAILURE,
     DELETE_BOOK_REQUEST,
     DELETE_BOOK_FAILURE
@@ -25,13 +24,12 @@ export const fetchBooks =() =>{
     }
 }
 
-export const addBook=(book)=>{
+export const addBook= book =>{
     return(dispatch)=>{
         dispatch(postBookRequest())
-        axios.post('http://localhost:8080/api/books', {book})
+        axios.post('http://localhost:8080/api/books', book)
             .then(response=>{
                 console.log(response)
-                dispatch(postBookSuccess(book))
                 dispatch(fetchBooks())
             })
             .catch(error=>{
@@ -80,12 +78,6 @@ export const fetchBooksFailure = error => {
 export const postBookRequest=()=>{
     return{
         type:POST_BOOK_REQUEST
-    }
-}
-export const postBookSuccess=bookAdded=>{
-    return{
-        type:POST_BOOK_SUCCESS,
-        payload:bookAdded
     }
 }
 

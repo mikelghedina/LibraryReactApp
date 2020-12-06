@@ -3,7 +3,6 @@ import {
     FETCH_BOOKS_SUCCESS,
     FETCH_BOOKS_FAILURE,
     POST_BOOK_REQUEST,
-    POST_BOOK_SUCCESS,
     POST_BOOK_FAILURE,
     DELETE_BOOK_REQUEST,
     DELETE_BOOK_FAILURE
@@ -39,11 +38,6 @@ const bookReducer = (state = initialState, action) => {
             return {
                 ...state,
                 loading: true
-            }
-        case POST_BOOK_SUCCESS:
-            return {
-                ...state,
-                booksData: [...state.booksData, action.payload]
             }
         case POST_BOOK_FAILURE:
             return {

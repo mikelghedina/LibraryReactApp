@@ -11,14 +11,14 @@ class NewBook extends Component{
         id:'',
         title:'',
         isbn:'',
-        pages:''
-        //author:[]
+        pages:'',
+        author:{
+            id:''
+        }
     }
-
-    handleOnClickAddBook=event=>{
-        event.preventDefault();
+    handleOnClickAddBook=(newBook)=>{
         console.log(this.state)
-        this.props.addBook.bind(this, this.state);
+        this.props.addBook(newBook)
         this.setState(
             {
                 title: '',
@@ -36,18 +36,19 @@ class NewBook extends Component{
                 <td><FormControl type="Integer" placeholder="Add Pages" value={this.state.pages}
                                  onChange={(event) => (this.setState({pages: event.target.value}))}/></td>
                 <td>
-                    <Form.Control as="select" custom>{this.props.author.map(a=>
-                        <option>{a.name + " " + a.lastName}</option>
+                    <Form.Control as="select" custom value={this.state.author.id}
+                                  onChange={(event)=>(this.setState({...this.state, author: {id: event.target.value}}))}>
+                        {this.props.author.map(a=>
+                        <option value={a.id} key={a.id}>{a.name + " " + a.lastName}</option>
                     )}</Form.Control>
                 </td>
-                <td><Button onClick={this.props.addBook.bind(this, this.state)}>Add Book</Button></td>
+                <td><Button onClick={this.handleOnClickAddBook.bind(this, this.state)}>Add Book</Button></td>
             </tr>
         )
     }
 }
 const mapStateToProps=state=>{
     return{
-        book:state.book.booksData,
         author:state.author.authorsData
     }
 }
@@ -56,5 +57,4 @@ const mapDispatchToProps=dispatch=>{
         addBook:(book)=>dispatch(addBook(book))
     }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(NewBook)

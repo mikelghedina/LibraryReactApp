@@ -7,13 +7,15 @@ import NewBook from "./NewBook";
 import {connect} from "react-redux";
 import {deleteBook, fetchBooks} from "../../store/actions/bookActions";
 import {Button} from "react-bootstrap";
+import {fetchAuthors} from "../../store/actions/authorActions";
 
 
 
 class BookList extends React.Component{
 
     componentDidMount() {
-        this.props.fetchBooks()
+        this.props.fetchBooks();
+        this.props.fetchAuthors();
     }
 
     render() {
@@ -56,12 +58,14 @@ class BookList extends React.Component{
 
 const mapStateToProps =state=>{
     return{
-        bookList:state.book.booksData
+        bookList:state.book.booksData,
+        author:state.author.authorsData
     }
 }
 const mapDispatchToProps = dispatch =>{
     return{
         fetchBooks:()=>dispatch(fetchBooks()),
+        fetchAuthors:()=>dispatch(fetchAuthors()),
         deleteBook:(bookId)=>dispatch(deleteBook(bookId))
     }
 }
