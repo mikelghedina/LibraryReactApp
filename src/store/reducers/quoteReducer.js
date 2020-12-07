@@ -1,63 +1,63 @@
 import {
-    FETCH_AUTHORS_REQUEST,
-    FETCH_AUTHORS_SUCCESS,
-    FETCH_AUTHORS_FAILURE,
-    POST_AUTHOR_REQUEST,
-    POST_AUTHOR_FAILURE,
-    DELETE_AUTHOR_REQUEST,
-    DELETE_AUTHOR_FAILURE
-} from '../actions/authorTypes'
+    FETCH_QUOTES_REQUEST,
+    FETCH_QUOTES_SUCCESS,
+    FETCH_QUOTES_FAILURE,
+    POST_QUOTE_REQUEST,
+    POST_QUOTE_FAILURE,
+    DELETE_QUOTE_REQUEST,
+    DELETE_QUOTE_FAILURE
+} from '../actions/quoteTypes'
 
 
 const initialState = {
     loading: false,
-    authorsData: [],
+    quotesData: [],
     error: ''
 }
 
-const authorReducer = (state = initialState, action) => {
+const quoteReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_AUTHORS_REQUEST:
+        case FETCH_QUOTES_REQUEST:
             return {
                 ...state,
                 loading: true
             }
-        case FETCH_AUTHORS_SUCCESS:
+        case FETCH_QUOTES_SUCCESS:
             return {
                 loading: false,
-                authorsData: action.payload,
+                quotesData: action.payload,
                 error: ''
             }
-        case FETCH_AUTHORS_FAILURE:
+        case FETCH_QUOTES_FAILURE:
             return {
                 loading: false,
-                authorsData: [],
+                quotesData: [],
                 error: action.payload
             }
-        case POST_AUTHOR_REQUEST:
+        case POST_QUOTE_REQUEST:
             return {
                 ...state,
                 loading: true
             }
-        case POST_AUTHOR_FAILURE:
+        case POST_QUOTE_FAILURE:
             return {
                 loading: false,
-                authorsData: [],
+                quotesData: [],
                 error: action.payload
             }
-        case DELETE_AUTHOR_REQUEST:
+        case DELETE_QUOTE_REQUEST:
             return {
                 ...state,
                 loading: true
             }
-        case DELETE_AUTHOR_FAILURE:
+        case DELETE_QUOTE_FAILURE:
             return {
                 loading: false,
-                authorsData: [],
+                quotesData: [],
                 error: action.payload
             }
         default: return state
     }
 }
 
-export default authorReducer;
+export default quoteReducer;

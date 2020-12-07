@@ -1,21 +1,27 @@
 import React, {Component} from 'react'
-import axios from "axios";
 import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 import {Button} from "react-bootstrap";
+import {connect} from "react-redux";
+import {addQuote} from "../../store/actions/quoteActions";
 
 class NewQuote extends Component{
+
     state={
-        content:''
+        id:'',
+        content:'',
+        author:{
+            id:''
+        }
     }
 
-    handlePostQuote =()=>{
-        const newQuote = {
-            content: this.state.content
-        }
-        axios.post('/quotes', newQuote)
-            .then(res =>console.log(res.data))
-            .catch(error=> console.log(error))
+    handleOnClickAddQuote=(newQuote)=>{
+        console.log(this.state)
+        this.props.addQuote(newQuote)
+        this.setState(
+            {
+                content:''
+            })
     }
 
     render() {
@@ -23,14 +29,26 @@ class NewQuote extends Component{
             <tr>
                 <td><FormControl type="text" placeholder="Add title" value={this.state.content}
                                  onChange={(event) => this.setState({content: event.target.value})}/></td>
-                <td><Form>
-                    <Form.Control as="select" custom >
-                        <option>1</option>
-                    </Form.Control>
-                </Form></td>
-                <td><Button onClick={this.handlePostQuote}>Add Quote</Button></td>
+                <td>
+                    <Form.Control as="select" custom value={this.state.author.id}
+                                  onChange={(event)=>(this.setState({...this.state, author: {id: event.target.value}}))}>
+                        {this.props.author.map(a=>
+                            <option value={a.id} key={a.id}>{a.name + " " + a.lastName}</option>
+                        )}</Form.Control>
+                </td>
+                <td><Button onClick={this.handleOnClickAddQuote.bind(this, this.state)}>Add Quote</Button></td>
             </tr>
         )
     }
 }
-export default NewQuote
+const mapStateToProps=state=>{
+    return{
+        author:state.author.authorsData
+    }
+}
+const mapDispatchToProps=dispatch=>{
+    return{
+        addQuote:(quote)=>dispatch(addQuote(quote))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(NewQuote)

@@ -3,10 +3,8 @@ import {
     FETCH_AUTHORS_SUCCESS,
     FETCH_AUTHORS_FAILURE,
     POST_AUTHOR_REQUEST,
-    POST_AUTHOR_SUCCESS,
     POST_AUTHOR_FAILURE,
     DELETE_AUTHOR_REQUEST,
-    DELETE_AUTHOR_SUCCESS,
     DELETE_AUTHOR_FAILURE
 } from './authorTypes'
 import axios from 'axios'
@@ -25,13 +23,12 @@ export const fetchAuthors =() =>{
             })
     }
 }
-export const addAuthor=(author)=>{
+export const addAuthor=author=>{
     return(dispatch)=>{
         dispatch(postAuthorRequest())
         axios.post('http://localhost:8080/api/authors', author)
             .then(response=>{
-                console.log(response.data)
-                dispatch(postAuthorSuccess(author))
+                console.log(response)
                 dispatch(fetchAuthors())
             })
             .catch(error=>{
@@ -82,13 +79,6 @@ export const postAuthorRequest=()=>{
         type:POST_AUTHOR_REQUEST
     }
 }
-export const postAuthorSuccess=(authorAdded)=>{
-    return{
-        type:POST_AUTHOR_SUCCESS,
-        payload:authorAdded
-    }
-}
-
 export const postAuthorFailure=error=>{
     return{
         type:POST_AUTHOR_FAILURE,
@@ -98,12 +88,6 @@ export const postAuthorFailure=error=>{
 export const deleteAuthorRequest=()=>{
     return{
         type:DELETE_AUTHOR_REQUEST
-    }
-}
-export const deleteAuthorSuccess=(authorId)=>{
-    return{
-        type:DELETE_AUTHOR_SUCCESS,
-        payload:authorId
     }
 }
 export const deleteAuthorFailure=error=>{

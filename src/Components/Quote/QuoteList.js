@@ -1,49 +1,20 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import Table from "react-bootstrap/Table";
 import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 import SearchFilter from "../../Utils/SearchFilter";
 import {Button} from "react-bootstrap";
 import NewQuote from "./NewQuote";
+import {connect} from "react-redux";
+import {deleteQuote, fetchQuotes} from "../../store/actions/quoteActions";
+import {fetchAuthors} from "../../store/actions/authorActions";
 
-export default class QuoteList extends Component{
+class QuoteList extends Component{
 
-    constructor(props) {
-        super(props);
-        this.state={
-            quote:[{
-                id:'',
-                content:'',
-                author:{
-                    id:'',
-                    name:'',
-                    lastName:''
-                }
-            }]
-        }
-    }
 
     componentDidMount() {
-        axios
-            .get('/quotes')
-            .then(res=>{
-                this.setState({quote: res.data})
-            }).catch(error=> console.log(error))
-    };
-
-    handleDeleteQuote =(id)=> {
-        axios.delete('/quotes'+ id)
-            .then(res => {
-                if(res.data !=null){
-                    this.setState({"show":true})
-                    setTimeout(()=> this.setState({"show":false}), 3000)
-                    //alert("Book deleted successfully")
-                    this.setState({
-                        quote: this.state.quote.filter(quote=> quote.id !== id)
-                    });
-                }
-            }).catch(error=> console.log(error))
+        this.props.fetchQuotes();
+        this.props.fetchAuthors();
     };
 
 
@@ -60,7 +31,7 @@ export default class QuoteList extends Component{
                         <th>Author</th>
                     </tr>
                     </thead>
-                    <tbody>{this.state.quote.map(q=>
+                    <tbody>{this.props.quote.map(q=>
                         <tr key={q.id}>
                             <td>{q.content}</td>
                             {q.author!=null?
@@ -68,7 +39,7 @@ export default class QuoteList extends Component{
                                 : <td>""</td>}
                             <td>
                                 <Button variant="warning">Edit</Button>{' '}
-                                <Button variant="danger" onClick={this.handleDeleteQuote.bind(this, q.id)}>Delete</Button>
+                                <Button variant="danger" onClick={this.props.deleteQuote.bind(this, q.id)}>Delete</Button>
                             </td>
                         </tr>
                     )}</tbody>
@@ -80,3 +51,17 @@ export default class QuoteList extends Component{
         )
     }
 }
+const mapStateToProps=state=>{
+    return{
+        quote:state.quote.quotesData
+    }
+}
+const mapDispatchToProps=dispatch=>{
+    return{
+        fetchQuotes:()=>dispatch(fetchQuotes()),
+        fetchAuthors:()=>dispatch(fetchAuthors()),
+        deleteQuote:(quoteId)=>dispatch(deleteQuote(quoteId))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(QuoteList)

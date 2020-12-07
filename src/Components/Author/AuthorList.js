@@ -15,19 +15,6 @@ class AuthorList extends React.Component{
         this.props.fetchAuthors()
     }
 
-    /*handleDeleteAuthor =(id)=> {
-        axios.delete('/authors'+ id)
-            .then(res => {
-                if(res.data !=null){
-                    this.setState({"show":true})
-                    setTimeout(()=> this.setState({"show":false}), 3000)
-                    this.setState({
-                        author: this.state.author.filter(author=> author.id !== id)
-                    });
-                }
-            }).catch(error=> console.log(error))
-    };*/
-
     render() {
         return(
             <div>
