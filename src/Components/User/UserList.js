@@ -1,27 +1,22 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import Table from "react-bootstrap/Table";
 import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 import SearchFilter from "../../Utils/SearchFilter";
+import {deleteUser, fetchUsers} from "../../store/actions/userActions";
+import {connect} from "react-redux";
+import {Button} from "react-bootstrap";
+import NewUser from "./NewUser";
 
-export default class UserList extends Component{
+class UserList extends Component{
 
-    constructor(props) {
-        super(props);
-        this.state={
-            user:[{
-                id:'',
-
-            }]
-        }
+    state={
+        id:'',
+        username:'',
+        password:'',
     }
     componentDidMount() {
-        axios
-            .get('/users')
-            .then(res=>{
-                this.setState({user: res.data})
-            }).catch(error=> console.log(error))
+        this.props.fetchUsers();
     };
 
 
@@ -34,18 +29,38 @@ export default class UserList extends Component{
                 <Table striped bordered hover size="sm" id="myTable" >
                     <thead>
                     <tr >
-                        <th>Content</th>
-                        <th>Author</th>
+                        <th>Username</th>
+                        <th>Password</th>
                     </tr>
                     </thead>
-                    <tbody>{this.state.user.map(u=>
+                    <tbody>{this.props.user.map(u=>
                         <tr key={u.id}>
-                            <td></td>
-                            <td></td>
+                            <td>{u.username}</td>
+                            <td>{u.password}</td>
+                            <td><Button variant="danger" onClick={this.props.deleteUser.bind(this, u.id)}>Delete</Button></td>
                         </tr>
                     )}</tbody>
+                    <tbody>
+                        <NewUser/>
+                    </tbody>
                 </Table>
             </div>
         )
     }
 }
+const mapStateToProps=state=>{
+    return{
+        user:state.user.usersData
+    }
+}
+
+const mapDispatchToProps=dispatch=>{
+    return{
+        fetchUsers:()=>dispatch(fetchUsers()),
+        deleteUser:(userId)=>dispatch(deleteUser(userId))
+    }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps)(UserList)
+
+
