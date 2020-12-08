@@ -10,18 +10,11 @@ import {deleteAuthor, fetchAuthors} from "../../store/actions/authorActions";
 
 class AuthorList extends React.Component{
 
-    state={
-        showAlert:false
-    }
 
     componentDidMount() {
         this.props.fetchAuthors()
     }
 
-    handleToggleShowAlert=()=>{
-        this.setState(state=>{state.showAlert=true})
-        console.log(this.state.showAlert)
-    }
 
     render() {
         return(
@@ -41,7 +34,7 @@ class AuthorList extends React.Component{
                             <td>{a.name}</td>
                             <td>{a.lastName}</td>
                             <td>
-                                <Button variant="warning" onClick={this.handleToggleShowAlert}>Details</Button>{' '}
+                                <Button variant="warning" >Details</Button>{' '}
                                 <Button variant="danger" onClick={this.props.deleteAuthor.bind(this, a.id)}>Delete</Button>
                             </td>
                         </tr>)}

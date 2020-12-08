@@ -1,5 +1,4 @@
 import React, {Component} from "react";
-import axios from 'axios';
 import SearchFilter from "../../Utils/SearchFilter";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
@@ -8,21 +7,9 @@ import Table from "react-bootstrap/Table";
 
 export default class RegistryList extends Component{
 
-    constructor(props) {
-        super(props);
-        this.state={
-            registry:[{
-                id:''
-            }]
-        }
-    }
 
     componentDidMount() {
-        axios
-            .get('/registries')
-            .then(res => {
-                this.setState({registry: res.data})
-            }).catch(error=> console.log(error))
+
     };
 
     render() {
