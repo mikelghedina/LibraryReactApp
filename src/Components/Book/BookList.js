@@ -5,9 +5,9 @@ import Form from "react-bootstrap/Form";
 import SearchFilter from "../../Utils/SearchFilter";
 import NewBook from "./NewBook";
 import {connect} from "react-redux";
-import {deleteBook, fetchBooks} from "../../store/actions/bookActions";
+import {deleteBook, fetchBooks} from "../../store/actions/BookActionTypes/bookActions";
 import {Button} from "react-bootstrap";
-import {fetchAuthors} from "../../store/actions/authorActions";
+import {fetchAuthors} from "../../store/actions/AuthorActionsTypes/authorActions";
 
 
 

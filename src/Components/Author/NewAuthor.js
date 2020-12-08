@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import FormControl from "react-bootstrap/FormControl";
 import {Button} from "react-bootstrap";
 import {connect} from "react-redux";
-import {addAuthor} from "../../store/actions/authorActions";
+import {addAuthor} from "../../store/actions/AuthorActionsTypes/authorActions";
 
 
 class NewAuthor extends Component{

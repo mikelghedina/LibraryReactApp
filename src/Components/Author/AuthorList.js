@@ -6,20 +6,21 @@ import SearchFilter from "../../Utils/SearchFilter";
 import {Button} from "react-bootstrap";
 import NewAuthor from "./NewAuthor";
 import {connect} from 'react-redux'
-import {deleteAuthor, fetchAuthors} from "../../store/actions/authorActions";
+import {deleteAuthor, fetchAuthors} from "../../store/actions/AuthorActionsTypes/authorActions";
 
 class AuthorList extends React.Component{
 
     state={
-        showModal:false
+        showAlert:false
     }
 
     componentDidMount() {
         this.props.fetchAuthors()
     }
-    handleShowDetails=()=>{
-        this.setState(prevState=>({showModal:!prevState.showModal}))
-        console.log(this.state.showModal)
+
+    handleToggleShowAlert=()=>{
+        this.setState(state=>{state.showAlert=true})
+        console.log(this.state.showAlert)
     }
 
     render() {
@@ -40,7 +41,7 @@ class AuthorList extends React.Component{
                             <td>{a.name}</td>
                             <td>{a.lastName}</td>
                             <td>
-                                <Button variant="warning" onClick={this.handleShowDetails}>Details</Button>{' '}
+                                <Button variant="warning" onClick={this.handleToggleShowAlert}>Details</Button>{' '}
                                 <Button variant="danger" onClick={this.props.deleteAuthor.bind(this, a.id)}>Delete</Button>
                             </td>
                         </tr>)}
