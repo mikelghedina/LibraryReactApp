@@ -27,7 +27,7 @@ class NewQuote extends Component{
     render() {
         return(
             <tr>
-                <td><FormControl type="text" placeholder="Add title" value={this.state.content}
+                <td><FormControl type="text" placeholder="Add Quote" value={this.state.content}
                                  onChange={(event) => this.setState({content: event.target.value})}/></td>
                 <td>
                     <Form.Control as="select" custom value={this.state.author.id}

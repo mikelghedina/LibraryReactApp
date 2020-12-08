@@ -8,11 +8,18 @@ import NewAuthor from "./NewAuthor";
 import {connect} from 'react-redux'
 import {deleteAuthor, fetchAuthors} from "../../store/actions/authorActions";
 
-
 class AuthorList extends React.Component{
+
+    state={
+        showModal:false
+    }
 
     componentDidMount() {
         this.props.fetchAuthors()
+    }
+    handleShowDetails=()=>{
+        this.setState(prevState=>({showModal:!prevState.showModal}))
+        console.log(this.state.showModal)
     }
 
     render() {
@@ -23,7 +30,7 @@ class AuthorList extends React.Component{
                 </Form>
                 <Table striped bordered hover size="sm" id="myTable">
                     <thead>
-                    <tr >
+                    <tr>
                         <th>Name</th>
                         <th>Last Name</th>
                     </tr>
@@ -33,11 +40,11 @@ class AuthorList extends React.Component{
                             <td>{a.name}</td>
                             <td>{a.lastName}</td>
                             <td>
-                                <Button variant="warning">Edit</Button>{' '}
+                                <Button variant="warning" onClick={this.handleShowDetails}>Details</Button>{' '}
                                 <Button variant="danger" onClick={this.props.deleteAuthor.bind(this, a.id)}>Delete</Button>
                             </td>
-                        </tr>
-                    )}</tbody>
+                        </tr>)}
+                    </tbody>
                     <tbody>
                         <NewAuthor/>
                     </tbody>

@@ -38,7 +38,7 @@ class QuoteList extends Component{
                                 <td>{q.author.name + " " + q.author.lastName}</td>
                                 : <td>""</td>}
                             <td>
-                                <Button variant="warning">Edit</Button>{' '}
+                                <Button variant="warning">Details</Button>{' '}
                                 <Button variant="danger" onClick={this.props.deleteQuote.bind(this, q.id)}>Delete</Button>
                             </td>
                         </tr>
