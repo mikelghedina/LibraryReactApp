@@ -6,7 +6,7 @@ import {
     POST_QUOTE_FAILURE,
     DELETE_QUOTE_REQUEST,
     DELETE_QUOTE_FAILURE
-} from '../actions/QuoteActionTypes/quoteTypes'
+} from '../actions/quoteTypes'
 
 
 const initialState = {

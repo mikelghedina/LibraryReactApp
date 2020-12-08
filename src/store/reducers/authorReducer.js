@@ -6,7 +6,7 @@ import {
     POST_AUTHOR_FAILURE,
     DELETE_AUTHOR_REQUEST,
     DELETE_AUTHOR_FAILURE
-} from '../actions/AuthorActionsTypes/authorTypes'
+} from '../actions/authorTypes'
 
 
 const initialState = {

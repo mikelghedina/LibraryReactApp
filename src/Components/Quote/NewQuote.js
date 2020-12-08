@@ -3,7 +3,7 @@ import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 import {Button} from "react-bootstrap";
 import {connect} from "react-redux";
-import {addQuote} from "../../store/actions/QuoteActionTypes/quoteActions";
+import {addQuote} from "../../store/actions/quoteActions";
 
 class NewQuote extends Component{
 

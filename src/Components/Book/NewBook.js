@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 import {Button} from "react-bootstrap";
-import {addBook} from "../../store/actions/BookActionTypes/bookActions";
+import {addBook} from "../../store/actions/bookActions";
 import {connect} from "react-redux";
 
 class NewBook extends Component{
