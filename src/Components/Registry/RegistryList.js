@@ -3,13 +3,15 @@ import SearchFilter from "../../Utils/SearchFilter";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Table from "react-bootstrap/Table";
+import {fetchRegistries} from "../../store/actions/registryActions";
+import {connect} from "react-redux";
 
 
-export default class RegistryList extends Component{
+class RegistryList extends Component{
 
 
     componentDidMount() {
-
+        this.props.fetchRegistry();
     };
 
     render() {
@@ -21,18 +23,31 @@ export default class RegistryList extends Component{
                 <Table striped bordered hover size="sm" id="myTable">
                     <thead>
                     <tr >
-                        <th>Name</th>
-                        <th>Last Name</th>
+                        <th>User</th>
+                        <th>Book</th>
+                        <th>Date</th>
                     </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>asdas</td>
-                            <td>asdas</td>
+                    <tbody>{this.props.registry.map(r=>
+                        <tr key={r.id}>
+                            <td>{r.user.username}</td>
+                            <td>{r.book[0].title}</td>
+                            <td>{r.date}</td>
                         </tr>
-                    </tbody>
+                    )}</tbody>
                 </Table>
             </div>
         )
     }
 }
+const mapStateToProps=state=>{
+    return{
+        registry:state.registry.registriesData
+    }
+}
+const mapDispatchToProps=dispatch=>{
+    return{
+        fetchRegistry:()=>dispatch(fetchRegistries())
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(RegistryList)
