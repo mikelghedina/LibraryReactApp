@@ -10,7 +10,7 @@ import QuoteList from "./Components/Quote/QuoteList";
 import RegistryList from "./Components/Registry/RegistryList";
 import UserList from "./Components/User/UserList";
 
-
+//Routing all the components with the navBar.
 class App extends Component{
   render() {
     return(

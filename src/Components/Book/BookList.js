@@ -10,9 +10,9 @@ import {Button} from "react-bootstrap";
 import {fetchAuthors} from "../../store/actions/authorActions";
 
 
-
 class BookList extends React.Component{
 
+    //This way we tell React to fetch all the data we need and build it in render the moment we render the app.
     componentDidMount() {
         this.props.fetchBooks();
         this.props.fetchAuthors();
@@ -55,13 +55,17 @@ class BookList extends React.Component{
         )
     }
 }
-
+//We use Redux so we pass the data we store on Redux Store to this component via Props. This way
+//we can use easily all the data we need.
 const mapStateToProps =state=>{
     return{
         bookList:state.book.booksData,
         author:state.author.authorsData
     }
 }
+
+//We use Redux to dispatch all the actions we stored in our store configuration. This way we pass all the actions
+//as props to this component and we can use this functions as props.
 const mapDispatchToProps = dispatch =>{
     return{
         fetchBooks:()=>dispatch(fetchBooks()),
@@ -70,4 +74,5 @@ const mapDispatchToProps = dispatch =>{
     }
 }
 
+//We use connect from redux to be able to "connect" the state and actions from our store in this component class.
 export default connect(mapStateToProps,mapDispatchToProps)(BookList)

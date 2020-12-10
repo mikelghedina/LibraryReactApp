@@ -2,10 +2,8 @@ import React, {Component} from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
-
+//Simple Navigation bar using react BootStrap to style it.
 class NavBar extends Component{
-
-
     render() {
         return(
         <Navbar bg="light" expand="lg">

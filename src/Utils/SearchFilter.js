@@ -1,4 +1,4 @@
-
+//This is a search filter method so whenever we face a table we can filter it by using the input related in AuthorList, BookList, QuoteList, Registry and UserList.
 export default function SearchFilter(){
 
         let input, filter, table, tr, td, i, txtValue;

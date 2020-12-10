@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 import store from "./store/store";
 
-
+//we need a provider which our component store does that work for us.
+//This way we provide all the data we will be using in our components.
 ReactDOM.render(
   <React.StrictMode>
       <Provider store={store}>
