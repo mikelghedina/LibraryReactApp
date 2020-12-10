@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 
 class NewUser extends Component{
 
+    //
     state={
         id:'',
         username:'',
@@ -38,7 +39,8 @@ class NewUser extends Component{
         )
     }
 }
-
+//We use Redux to dispatch all the actions we stored in our store configuration. This way we pass all the actions
+//as props to this component and we can use this functions as props.
 const mapDispatchToProps=dispatch=>{
     return{
         addUser:(user)=>dispatch(addUser(user))

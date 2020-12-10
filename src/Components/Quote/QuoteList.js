@@ -11,7 +11,7 @@ import {fetchAuthors} from "../../store/actions/authorActions";
 
 class QuoteList extends Component{
 
-
+//This way we tell React to fetch all the data we need and build it in render the moment we render the app.
     componentDidMount() {
         this.props.fetchQuotes();
         this.props.fetchAuthors();
@@ -51,11 +51,15 @@ class QuoteList extends Component{
         )
     }
 }
+//We use Redux so we pass the data we store on Redux Store to this component via Props. This way
+//we can use easily all the data we need.
 const mapStateToProps=state=>{
     return{
         quote:state.quote.quotesData
     }
 }
+//We use Redux to dispatch all the actions we stored in our store configuration. This way we pass all the actions
+//as props to this component and we can use this functions as props.
 const mapDispatchToProps=dispatch=>{
     return{
         fetchQuotes:()=>dispatch(fetchQuotes()),
@@ -63,5 +67,5 @@ const mapDispatchToProps=dispatch=>{
         deleteQuote:(quoteId)=>dispatch(deleteQuote(quoteId))
     }
 }
-
+//We use connect from redux to be able to "connect" the state and actions from our store in this component class.
 export default connect(mapStateToProps, mapDispatchToProps)(QuoteList)
