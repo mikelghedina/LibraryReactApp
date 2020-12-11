@@ -3,7 +3,7 @@ import Table from "react-bootstrap/Table";
 import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 import SearchFilter from "../../Utils/SearchFilter";
-import {deleteUser, fetchUsers} from "../../store/actions/userActions";
+import {deleteUser, fetchUsers} from "../../store/actions/UserActionsTypes/userActions";
 import {connect} from "react-redux";
 import {Button} from "react-bootstrap";
 import NewUser from "./NewUser";

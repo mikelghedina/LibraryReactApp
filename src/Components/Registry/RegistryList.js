@@ -3,7 +3,7 @@ import SearchFilter from "../../Utils/SearchFilter";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Table from "react-bootstrap/Table";
-import {fetchRegistries} from "../../store/actions/registryActions";
+import {fetchRegistries} from "../../store/actions/RegistryActionsTypes/registryActions";
 import {connect} from "react-redux";
 
 

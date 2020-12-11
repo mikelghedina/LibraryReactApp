@@ -3,7 +3,7 @@ import FormControl from "react-bootstrap/FormControl";
 import Form from "react-bootstrap/Form";
 import {Button} from "react-bootstrap";
 import {connect} from "react-redux";
-import {addQuote} from "../../store/actions/quoteActions";
+import {addQuote} from "../../store/actions/QuoteActionsTypes/quoteActions";
 
 class NewQuote extends Component{
 //We define a state with the attributes of the new Quote we will add, also only the author id to assign the author we want.

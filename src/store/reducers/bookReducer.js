@@ -6,7 +6,7 @@ import {
     POST_BOOK_FAILURE,
     DELETE_BOOK_REQUEST,
     DELETE_BOOK_FAILURE
-} from '../actions/bookTypes'
+} from '../actions/BookActionsTypes/bookTypes'
 
 
 const initialState = {

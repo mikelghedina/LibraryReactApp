@@ -6,7 +6,7 @@ import SearchFilter from "../../Utils/SearchFilter";
 import {Button} from "react-bootstrap";
 import NewAuthor from "./NewAuthor";
 import {connect} from 'react-redux'
-import {deleteAuthor, fetchAuthors} from "../../store/actions/authorActions";
+import {deleteAuthor, fetchAuthors} from "../../store/actions/AuthorActionsTypes/authorActions";
 
 class AuthorList extends React.Component{
 

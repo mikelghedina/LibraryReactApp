@@ -6,8 +6,8 @@ import SearchFilter from "../../Utils/SearchFilter";
 import {Button} from "react-bootstrap";
 import NewQuote from "./NewQuote";
 import {connect} from "react-redux";
-import {deleteQuote, fetchQuotes} from "../../store/actions/quoteActions";
-import {fetchAuthors} from "../../store/actions/authorActions";
+import {deleteQuote, fetchQuotes} from "../../store/actions/QuoteActionsTypes/quoteActions";
+import {fetchAuthors} from "../../store/actions/AuthorActionsTypes/authorActions";
 
 class QuoteList extends Component{
 

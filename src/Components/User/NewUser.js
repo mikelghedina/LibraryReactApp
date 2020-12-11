@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import FormControl from "react-bootstrap/FormControl";
 import {Button} from "react-bootstrap";
-import {addUser} from "../../store/actions/userActions";
+import {addUser} from "../../store/actions/UserActionsTypes/userActions";
 import {connect} from "react-redux";
 
 class NewUser extends Component{

@@ -6,7 +6,7 @@ import {
     POST_REGISTRY_FAILURE,
     DELETE_REGISTRY_REQUEST,
     DELETE_REGISTRY_FAILURE
-} from '../actions/registryTypes'
+} from '../actions/RegistryActionsTypes/registryTypes'
 
 
 const initialState = {

@@ -6,7 +6,7 @@ import {
     POST_USER_FAILURE,
     DELETE_USER_REQUEST,
     DELETE_USER_FAILURE
-} from '../actions/userTypes'
+} from '../actions/UserActionsTypes/userTypes'
 
 
 const initialState = {
